@@ -1,0 +1,30 @@
+---
+title: "Data exploration"
+output: html_notebook
+editor_options: 
+  chunk_output_type: inline
+---
+
+```{r}
+library(tidyverse)
+
+dat <- readr::read_tsv(file = "data/Alaska_salmon/salmon_cluster_2021.txt")
+dat
+
+```
+
+The unit of analysis are fishing trips (coded by date), per household. Each household 
+has a permit (`permitno`) with a harvest limit (`harvestlimit`) that depend on 
+household size (`householdsize`). 
+
+The file has all fishing trips of the 2021 season, from `r `dat |> pull(date) |> range()`.
+So `year` is constant and can be dropped.
+
+```{r}
+dat |> select(choice:last_col())
+```
+
+```{r}
+names(dat)
+```
+
